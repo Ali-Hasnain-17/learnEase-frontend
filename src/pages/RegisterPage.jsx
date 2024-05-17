@@ -1,5 +1,7 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import isEmail from "is-email";
+import axios from "axios";
 
 function RegisterPage() {
   const [formData, setFormData] = useState({
@@ -14,6 +16,8 @@ function RegisterPage() {
     email: "",
     password: "",
   });
+
+  const navigate = useNavigate();
 
   async function register(e) {
     e.preventDefault();
@@ -50,16 +54,19 @@ function RegisterPage() {
       return;
     }
 
-    // register
-    // const url = "";
-    // await fetch(url, {
-    //   method: "POST",
-    //   body: JSON.stringify(formData),
-    // });
+    const response = await axios.post(
+      "http://localhost:5000/auth/register",
+      formData
+    );
+    const { isSuccess } = response.data;
+
+    if (isSuccess) {
+      navigate("/login");
+    }
   }
 
   return (
-    <div className="register-form">
+    <div className="form">
       <h1>Register User</h1>
       <form onSubmit={register}>
         <div className="field">
