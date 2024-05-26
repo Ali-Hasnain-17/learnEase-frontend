@@ -1,10 +1,11 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { redirect, useNavigate } from "react-router-dom";
 import isEmail from "is-email";
 import axios from "axios";
 
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { isAuth } from "../utils/isAuth";
 
 function LoginPage() {
   const [formData, setFormData] = useState({
@@ -55,7 +56,8 @@ function LoginPage() {
       );
 
       if (response.data.isSuccess) {
-        navigate(`/onboarding?type=${response.data.type}`);
+        localStorage.setItem("user", JSON.stringify(response.data.user));
+        navigate(`/onboarding`);
       }
     } catch (e) {
       toast.error(e.response.data.message);

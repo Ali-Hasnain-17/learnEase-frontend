@@ -59,7 +59,8 @@ li {
   margin-top: 20px;
 }
 
-.form h1 {
+.form h1,
+.form h2 {
   font-weight: bold;
   font-family: cursive;
 }
@@ -78,7 +79,8 @@ li {
 }
 
 .field input,
-.field select {
+.field select,
+.field textarea {
   padding: 5px 10px;
   border-radius: 10px;
   border: 2px solid darkgray;
@@ -86,7 +88,12 @@ li {
   outline: none;
 }
 
-.field input.error {
+.field textarea {
+  resize: none;
+}
+
+.field input.error,
+.field textarea.error {
   border: 2px solid red;
 }
 
